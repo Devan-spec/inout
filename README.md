@@ -1,13 +1,5 @@
 Download Stable Version 6.0 from Release Panel.
 
-Uncoming Updates:
-* Introducing Inout Plus app
-* Client less Inout App (Mobile App)
-* KOHA Mobile app
-* Social Community App for Institutions based on KOHA
-for more information or demo contact on +918197173097 or email on info@playtech.in
-
-
 Changelog v6.0
 * Support php8.*
 * Minor bug fixes
@@ -26,6 +18,7 @@ Changelog 5
 * News module redesign
 * Banner added
 * Analog Clock added
+* Scan with phone camera button added
 
 [Bug Fixes]
 * Automatic logout after 20 minutes
@@ -53,30 +46,19 @@ Migration from version v4.* to v5.*
 **New Arrivals Setup**
 
 * Book image must be 150x200 resolution and must be in PNG format.
-
 * You can add upto 8 images of new arrival books.
-
 * Rename your images 1.png, 2.png and so on.
-
 * Move your all images to assets/books director. Replace existing images.
-
 * Login to master. Go to setup then setup main screen. 
-
 * Select New Arrivals and submit. Done!
-
 
 **Banner Setup**
 
 * Banner image should be 890x150 resulution and must be in PNG format.
-
 * You can design your own image in photoshop.
-
 * Rename image file to banner.png and move to assets/img directory. Replace existing image file.
-
 * Login to master. Go to setup then setup main screen. 
-
 * Select display banner and submit. Done!
-
 
 SUGGESTIONS ARE WELCOME. FEEL FREE TO CONTACT.
 
@@ -97,17 +79,17 @@ The system uses koha database to fetch the information of patrons and store it a
 
 Thank You
 
-Buy me a coffee: https://rzp.io/l/ta9LROfv7N
 
 Find the Guide Here: https://writeride.com/how-to-install-in-out-management-system/
 
-Profile @ https://omkar2403.github.io/its_me/
+Profile @ https://github.com/Devan-spec
 
-**Only Urgent** Mail Me @ omkar.kakeru@gmail.com else use our ticket system mentioned above.
+**Only Urgent** Mail Me @ gdevansh396@gmail.com else use our ticket system mentioned above.
 
 Demo Video @ https://www.youtube.com/watch?v=1LqqwKYamHc
 
 Thank you all library staff & koha community for making use of this application. Thank you all.
 
 In Out Management System by Omkar Kakeru is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.
+
 
