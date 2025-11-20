@@ -10,7 +10,7 @@
     <div class="copyright float-right">
       © <script>document.write(new Date().getFullYear())</script>, made with 
       <i class="material-icons" style="color:red;">favorite</i> by 
-      <a href="https://omkar2403.github.io/its_me/" target="_blank">Omkar Kakeru</a> for a better web.
+      <a href="https://omkar2403.github.io/its_me/" target="_blank">Devansh Gupta</a> for a better web.
     </div>
   </div>
 </footer>               

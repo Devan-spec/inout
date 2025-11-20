@@ -17,8 +17,8 @@
   $clock = false;
   $banner = false;
 
-  $banner = $_SESSION["banner"];
-  $activedash = $_SESSION["activedash"];
+  $banner = isset($_SESSION["banner"]) ? $_SESSION["banner"] : true;
+  $activedash = isset($_SESSION["activedash"]) ? $_SESSION["activedash"] : "";
 
   if($banner == "true"){
   	$banner = true;
@@ -63,15 +63,35 @@
 <div class="content" style="min-height: calc(100vh - 90px);">
 	<div class="container-fluid">
 	  <div class="row">
-	    <div class="col-md-6">
+	    <div class="col-md-5">
 	    	<div class="card" style="min-height: calc(100vh - 150px);">
 	        <div class="card-body">
 	        	<?php if($banner) { ?>
-							<img class="img-responsive" src="assets/img/banner.png">
-						<?php }else{ ?>
-							<h3 class="text-center"><?php echo $_SESSION['lib']; ?></h3>
-	        	<?php } ?>
-	        <?php if($news) { ?>
+					<h3 class="text-center">Guru Nanak Dev Engineering College</h3>
+					<img class="img-responsive" src="assets/img/banner.png" style="width: 100%; max-width: 500px; height: auto; margin: 20px auto; display: block;">
+					<div class="analogclock" style="margin-top: 30px; transform: scale(0.7); transform-origin: center;">
+					  <div>
+					    <div class="cinfo cdate"></div>
+					    <div class="cinfo cday"></div>
+					  </div>
+					  <div class="cdot"></div>
+					  <div>
+					    <div class="chour-hand"></div>
+					    <div class="cminute-hand"></div>
+					    <div class="csecond-hand"></div>
+					  </div>
+					  <div id="dial">
+					    <span class="n3">3</span>
+					    <span class="n6">6</span>
+					    <span class="n9">9</span>
+					    <span class="n12">12</span>
+					  </div>
+					  <div class="cdiallines"></div>
+					</div>
+				<?php }else{ ?>
+					<h3 class="text-center">Guru Nanak Dev Engineering College</h3>
+				<?php } ?>
+	        <?php if(!empty($news)) { ?>
 	        	<div class="card-block">
 							<div class="card-title text-info h4 text-center">
 								 <?php echo "<br/>".$data['nhead']; ?> 
@@ -99,7 +119,7 @@
 							<img src="assets/books/8.png">
 						</div>
 					<?php } ?>
-					<?php if($quote) { ?>
+					<?php if(!empty($quote)) { ?>
 						<div class="card-block2" style="min-height: calc(100vh - 430px);">
 							<div class="qcard">
 							  <div class="qcontent">
@@ -112,7 +132,7 @@
 							</div>
 						</div>
 					<?php } ?>
-					<?php if($clock) { ?>
+					<?php if(!empty($clock)) { ?>
 						<div class="card-body">
 							<div class="analogclock">
 							  <div>
@@ -205,7 +225,27 @@
 								<div class="animated pulse infinite"> 
 							    <span class='text-info'>SCAN YOUR ID CARD</span>
 							  </div>
-							  <div class="row">
+							  <div class="text-center mt-3">
+							    <button id="cameraBtn" class="btn btn-primary btn-lg" onclick="openCamera()">
+							      <i class="material-icons">camera_alt</i> Scan with Phone Camera
+							    </button>
+							  </div>
+							  <div id="cameraDiv" style="display: none;">
+							    <div id="scanner" style="width: 100%; height: 300px;"></div>
+							    <div id="scanStatus" class="text-center mt-2">
+							      <span class="badge badge-warning">Loading camera...</span>
+							    </div>
+							    <button onclick="stopCamera()" class="btn btn-danger mt-2">Stop Camera</button>
+							  </div>							  <div class="text-center mt-3">
+							  
+							  </div>
+							  <div id="cameraContainer" style="display: none;">
+							    <video id="cameraPreview" width="100%" height="300" autoplay></video>
+							    <canvas id="canvas" style="display: none;"></canvas>
+							    <div class="text-center mt-2">
+							      <button id="stopCamera" class="btn btn-danger">Stop Camera</button>
+							    </div>
+							  </div>							  <div class="row">
 									<div class="col-md-3">
 				            <div class="card card-stats">
 				              <div class="card-header card-header-info card-header-icon">
@@ -271,15 +311,129 @@
 					<?php
 						}
 					?>
-				</div>
+<script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+<script>
+let scanning = false;
+
+function openCamera() {
+    const cameraDiv = document.getElementById('cameraDiv');
+    cameraDiv.style.display = 'block';
+    
+    document.getElementById('scanStatus').innerHTML = '<span class="badge badge-warning">Starting camera...</span>';
+    
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: document.querySelector('#scanner'),
+            constraints: {
+                width: 640,
+                height: 480,
+                facingMode: "environment"
+            }
+        },
+        decoder: {
+            readers: [
+                "code_128_reader",
+                "ean_reader", 
+                "ean_8_reader",
+                "code_39_reader",
+                "code_39_vin_reader",
+                "codabar_reader",
+                "upc_reader",
+                "upc_e_reader"
+            ]
+        }
+    }, function(err) {
+        if (err) {
+            alert('Camera error: ' + err);
+            cameraDiv.style.display = 'none';
+            return;
+        }
+        
+        document.getElementById('scanStatus').innerHTML = '<span class="badge badge-success">Scanning... Point at barcode</span>';
+        Quagga.start();
+        scanning = true;
+    });
+
+    Quagga.onDetected(function(data) {
+        if (scanning) {
+            document.getElementById('usn').value = data.codeResult.code;
+            stopCamera();
+            document.querySelector('form').submit();
+        }
+    });
+}
+
+function stopCamera() {
+    if (scanning) {
+        Quagga.stop();
+        scanning = false;
+    }
+    document.getElementById('cameraDiv').style.display = 'none';
+}
+</script>				</div>
 	    </div>
 	  </div>              
 	</div>
 </div>
-<script src="assets/js/analogclock.js"></script>
+<script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script><script src="assets/js/analogclock.js"></script>
 <script type="text/javascript">
 	$('span').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-	  	setTimeout(function(){
+	let cameraStream = null;
+	let codeReader = null;
+
+	document.getElementById('cameraBtn').addEventListener('click', function() {
+		startCamera();
+	});
+
+	document.getElementById('stopCamera').addEventListener('click', function() {
+		stopCamera();
+	});
+
+	function startCamera() {
+		const cameraContainer = document.getElementById('cameraContainer');
+		const video = document.getElementById('cameraPreview');
+		
+		cameraContainer.style.display = 'block';
+		
+		// Initialize barcode reader
+		codeReader = new ZXing.BrowserBarcodeReader();
+		
+		// Start camera with back camera preference
+		navigator.mediaDevices.getUserMedia({
+			video: { 
+				facingMode: { ideal: 'environment' },
+				width: { ideal: 1280 },
+				height: { ideal: 720 }
+			}
+		}).then(function(stream) {
+			cameraStream = stream;
+			video.srcObject = stream;
+			
+			// Start scanning
+			codeReader.decodeFromVideoDevice(null, 'cameraPreview', (result, err) => {
+				if (result) {
+					// Found barcode, submit it
+					document.getElementById('usn').value = result.text;
+					document.querySelector('form').submit();
+				}
+			});
+		}).catch(function(err) {
+			alert('Camera access denied or not available: ' + err.message);
+		});
+	}
+
+	function stopCamera() {
+		if (cameraStream) {
+			cameraStream.getTracks().forEach(track => track.stop());
+			cameraStream = null;
+		}
+		if (codeReader) {
+			codeReader.reset();
+		}
+		document.getElementById('cameraContainer').style.display = 'none';
+	}	  	setTimeout(function(){
 			window.location.replace("/inout/dash.php");
 		}, 5200);
 	});

@@ -3,9 +3,9 @@
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $servername = "localhost";
-$username = "root";
-$password = "root";
-$db = "inout";
+$username = "koha_library";
+$password = "-n27(jcRk[U!K\$EJ";
+$db = "lib";
 $koha_db = "koha_library";
 
 date_default_timezone_set("Asia/Kolkata");

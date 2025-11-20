@@ -28,7 +28,8 @@ $msg = $_GET['msg'] ?? null;
 <body class="off-canvas-sidebar">
 
 <div class="wrapper wrapper-full-page">
-    <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('assets/img/login.jpg'); background-size: cover; background-position: top center;">
+    <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('assets/img/login.jpg'); background-size: cover; background-position: top center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 100vh; padding: 2rem 0;">
+      <h1 style="color: white; font-size: 60px; font-weight: bold; text-align: center; text-shadow: 2px 2px 6px rgba(0,0,0,0.7); margin-bottom: 1rem;";">Guru Nanak Dev Engineering College</h1>
         <div class="container">
             <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
                 <form class="form" method="POST" action="login_verify.php">
@@ -97,9 +98,6 @@ $msg = $_GET['msg'] ?? null;
                         </div>
                     </div>
                 </form>
-                <form>
-                    <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_GffqOJ4TsFX8hN" async></script>
-                </form>
             </div>
         </div>
         
@@ -107,13 +105,13 @@ $msg = $_GET['msg'] ?? null;
             <div class="container">
                 <nav class="float-left footer-menu">
                     <ul>
-                        <li><a href="https://github.com/omkar2403/inout/">In Out System</a></li>
+                        <li><a href="">In Out System</a></li>
                         <li><a href="https://www.koha-community.org/">Powered By KOHA Community</a></li>
                     </ul>
                 </nav>
                 <div class="copyright float-right">
                     © <script>document.write(new Date().getFullYear())</script>, made with <i class="material-icons">favorite</i> by
-                    <a href="https://omkar2403.github.io/its_me/" target="_blank">Omkar Kakeru</a> for a better web.
+                    <a href="" target="_blank">Devansh Gupta</a> for a better web.
                 </div>
             </div>
         </footer>
